@@ -1,60 +1,27 @@
-// src/pages/RegisterPage.tsx
 import React, { useState } from 'react';
-import { signUp } from '../services/auth';
-import { Container, Typography, TextField, Button, Box } from '@mui/material';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { TextField, Button, Container, Typography } from '@mui/material';
+import supabase from '../services/supabaseClient'
 
-const RegisterPage: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+const Register: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const { data, error } = await signUp(email, password);
-        if (error) {
-            setMessage(error.message);
-        } else {
-            setMessage('Successfully registered');
-        }
-    };
+  const handleRegister = async () => {
+    const { error } = await supabase.auth.signUp({ email, password });
+    if (error) setError(error.message);
+    else alert('Registration successful, please check your email to confirm your registration');
+  };
 
-    return (
-        <>
-            <Header />
-            <Container>
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                    <Typography variant="h4">Register</Typography>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Email Address"
-                        autoComplete="email"
-                        autoFocus
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        Register
-                    </Button>
-                    {message && <Typography color="error">{message}</Typography>}
-                </Box>
-            </Container>
-            <Footer />
-        </>
-    );
+  return (
+    <Container maxWidth="xs">
+      <Typography variant="h4">Register</Typography>
+      <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth margin="normal" />
+      <TextField label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} fullWidth margin="normal" />
+      {error && <Typography color="error">{error}</Typography>}
+      <Button variant="contained" color="primary" onClick={handleRegister}>Register</Button>
+    </Container>
+  );
 };
 
-export default RegisterPage;
+export default Register;

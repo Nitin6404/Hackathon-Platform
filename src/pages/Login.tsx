@@ -1,58 +1,43 @@
 import React, { useState } from 'react';
 import { signIn } from '../services/auth';
-import { Container, Typography, TextField, Button, Box } from '@mui/material';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import CustomButton from '../components/Button';
+import CustomInput from '../components/Input';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [open, setOpen] = useState(false);
     const [message, setMessage] = useState('');
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleLogin = async () => {
         const { data, error } = await signIn(email, password);
         if (error) {
             setMessage(error.message);
+            setOpen(true);
         } else {
-            setMessage('Successfully logged in');
+            setMessage('Login successful');
+            setOpen(true);
         }
     };
 
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
-        <>
-            <Header />
-            <Container>
-                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                    <Typography variant="h4">Login</Typography>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Email Address"
-                        autoComplete="email"
-                        autoFocus
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                        Login
-                    </Button>
-                    {message && <Typography color="error">{message}</Typography>}
-                </Box>
-            </Container>
-            <Footer />
-        </>
+        <div>
+            <h1>Login</h1>
+            <CustomInput label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <CustomInput label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <CustomButton label="Login" onClick={handleLogin} />
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={message.includes('successful') ? 'success' : 'error'}>
+                    {message}
+                </Alert>
+            </Snackbar>
+        </div>
     );
 };
 
