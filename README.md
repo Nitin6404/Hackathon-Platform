@@ -25,55 +25,21 @@ This is a Hackathon Platform powered by **SoarX** designed to streamline the pro
 
 5. **Final Round**: The top teams compete in the final round of the hackathon, where they showcase their projects in person or virtually.
 
-## Current Milestone: Enhancements and Refinements
+### Team Registration and Selection
+#### Implementation Details:
+1. **Team Creation and Invitation**:
+   - Team leaders can create a team by providing a team name and description.
+   - Implement an invitation system where team leaders can invite members by email.
+   - Store team and invitation data in Supabase.
 
-1. **Initialize the Project**
-   - Set up a Git repository for version control.
-   - Initialize the React
-   - Install necessary dependencies
+2. **Joining Teams**:
+   - Users can view and request to join existing teams.
+   - Team leaders can approve or reject join requests through the platform.
 
-2. **Create the Frontend (React)**
-   - Set up the basic structure for your React application.
-   - Organize folders for components, pages, and services.
-
-3. **Set Up Supabase**
-   - Create a Supabase project.
-   - Set up authentication and database.
-
-## Next Milestone: Integration and Testing
-
-### *User Registration and Authentication*
-
-**Importance/Context**: This milestone focuses on implementing secure user registration and login functionality using Supabase Auth, ensuring that participants can create accounts, log in securely, and access the platform's features.
-
-**Specific Tasks**:
-
-1. **Create Registration and Login Forms in React**:
-   - **Explanation**: Registration and login forms serve as the entry point for users to access the platform. They provide a means for users to input their credentials securely.
-   - **Implementation Details**: Utilize React to design and develop the registration and login forms. Specific libraries or components such as Material-UI may be used for building the UI elements. These forms should include fields for email and password, and potentially additional information required for registration.
-
-2. **Use Supabase Auth for Handling User Authentication**:
-   - **Explanation**: Supabase Auth provides a robust and secure authentication solution for user management. Integrating Supabase Auth ensures that user authentication is handled securely and efficiently.
-   - **Implementation Details**: Utilize Supabase's authentication methods (`supabase.auth.signUp()` and `supabase.auth.signIn()`) within the React application to handle user registration and login processes. These methods interact with Supabase's authentication backend to authenticate users securely.
-
-3. **Implement Email Confirmation Using Supabase's Built-in Email Verification**:
-   - **Explanation**: Email verification adds an extra layer of security to the registration process by confirming the validity of a user's email address. This helps prevent unauthorized access and ensures that only legitimate users can register on the platform.
-   - **Implementation Details**: Configure Supabase to enable email verification for user registration. This involves setting up email verification settings in the Supabase dashboard and ensuring that Supabase is configured to send verification emails to users upon registration. Additionally, implement logic within the React application to handle email verification events and update the user's verification status accordingly.
-
-### *Email Verification*
-
-**Importance/Context**: Email verification is crucial for ensuring the security and legitimacy of user accounts on the platform. Customizing email templates adds a personalized touch to the verification process and enhances the user experience.
-
-**Specific Tasks**:
-
-1. **Use Supabase's Email Verification Feature**:
-   - **Explanation**: Supabase offers built-in email verification functionality, making it easy to verify the email addresses of registered users.
-   - **Implementation Details**: Enable email verification for user registration within the Supabase dashboard. This involves configuring email verification settings to suit the project's requirements, such as specifying email templates and setting up email sending options.
-
-2. **Customize Email Templates for Registration Confirmation and Verification via Supabase Dashboard**:
-   - **Explanation**: Customizing email templates allows for branding consistency and provides users with a personalized registration and verification experience.
-   - **Implementation Details**: Access the Supabase dashboard and navigate to the Email Templates section. Customize email templates for registration confirmation and verification by modifying elements such as the email subject, body content, and branding elements. This ensures that the emails align with the platform's branding and messaging guidelines, providing users with a cohesive experience.
-
+3. **Selection Process**:
+   - Admins can view and manage team registrations.
+   - Implement a selection process for teams based on criteria defined by the admin.
+   
 ## Contributors
 
 - [Nitin6404](https://github.com/Nitin6404) - Project Lead & Developer
